@@ -41,8 +41,7 @@ function message_send($message, $peer_id, $attachments = []) {
     return vkAPI('messages.send', [
         'random_id' => rand(),
         'peer_id' => $peer_id,
-        'message' => $message,
-        'payload' => 1000,
+        'message' => $message 
         'attachment' => implode(',', $attachments) 
     ]);
 }
