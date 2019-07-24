@@ -21,18 +21,17 @@ require 'utils/Functions.php';
 
 $lp = new LongPoll();
 
-while (true) {
-    foreach($lp->updates() as $update) {
-        if ($update['type'] == 'message_new') {
+foreach ($lp->updates() as $update) {
+    if ($update['type'] == "message_new" and $update['object']['from_id'] > 0) {
+        if ($update['object']['out'] == 0) {
             $peer_id = $update['object']['peer_id'];
             $user_id = $update['object']['from_id'];
             $message = $update['object']['text'];
             $message = mb_strtolower($message, 'UTF-8');
+
+            if (preg_match("/^(test)$/", $message)) {
+                message_send("Test complete.", $peer_id);
+            } else message_send("This command does exists.", $peer_id);
         }
-
-        if (preg_match("/^(test)$/", $message)) {
-            message_send("Test complete.", $peer_id);
-        } else message_send("This command does exists.", $peer_id);
-
     }
 }
