@@ -22,7 +22,7 @@ require 'utils/Functions.php';
 $lp = new LongPoll();
 
 while (true) {
-    foreach($lp->update() as $update) {
+    foreach($lp->updates() as $update) {
         if ($update['type'] == 'message_new') {
             $peer_id = $update['object']['peer_id'];
             $user_id = $update['object']['from_id'];
